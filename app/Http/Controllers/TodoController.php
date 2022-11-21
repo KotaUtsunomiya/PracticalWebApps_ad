@@ -16,12 +16,10 @@ class TodoController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->todos = $todos;
     }
 
     public function index(Request $request)
     {
-        // Request $request
         $user = Auth::user();
         $todos = $request->user()->todos()->get();
         return view('index', compact('user','todos')); 
@@ -34,7 +32,6 @@ class TodoController extends Controller
             'tag' => $request->tag,
         ]);
         return redirect()->back();
-        // return redirect()->route('todo.index');
     }
 
     public function update(ClientRequest $request, Todo $id)
@@ -45,7 +42,6 @@ class TodoController extends Controller
             'tag' => $request->tag,
         ])->save();
         return redirect()->back();
-        // return redirect()->route('todo.index');
     }
 
     public function destroy(Request $request, Todo $id)
@@ -53,7 +49,6 @@ class TodoController extends Controller
         $this->authorize('destroy', $id);
         $id->delete();
         return redirect()->back();
-        // return redirect()->route('todo.index');
     }
 
     public function find(Request $request)
